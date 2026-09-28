@@ -1,0 +1,13 @@
+﻿@model EcommerceApp.Product
+
+<h2>Edit Product</h2>
+
+<form method="post" action="/product/edit/@Model.Id">
+
+    <input type="text" name="Name" value="@Model.Name" />
+
+    <input type="number" name="Price" value="@Model.Price" />
+
+    <button type="submit">Update</button>
+
+</form>
