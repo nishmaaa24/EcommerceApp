@@ -10,7 +10,20 @@ namespace EcommerceApp
 
             var app = builder.Build();
 
-            app.MapControllers();
+            // Important for production / Docker
+            if (!app.Environment.IsDevelopment())
+            {
+                app.UseExceptionHandler("/Home/Error");
+                app.UseHsts();
+            }
+
+            app.UseStaticFiles();
+            app.UseRouting();
+
+            app.MapControllers();   // keeps your attribute routes working
+
+            // Optional: redirect root to the product list
+            app.MapGet("/", () => Results.Redirect("/product"));
 
             app.Run();
         }
